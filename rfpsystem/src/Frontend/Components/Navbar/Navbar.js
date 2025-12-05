@@ -37,6 +37,16 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link
+                        to="/email"
+                        className={styles.navItem}
+                        aria-label="email"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        Email
+                    </Link>
+                </li>
+                <li>
+                    <Link
                         to="/addVendor"
                         className={styles.navItem}
                         aria-label="addVendor"
