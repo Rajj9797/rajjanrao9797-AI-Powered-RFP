@@ -155,7 +155,7 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <button type="submit" className={styles.submitButton}>Save Request</button>
+                <button type="submit" className={styles.submitButton}>Send Request</button>
             </form>
 
         </div>
