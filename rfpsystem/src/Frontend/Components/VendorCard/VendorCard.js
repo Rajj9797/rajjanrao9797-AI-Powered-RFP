@@ -21,8 +21,7 @@ const VendorCard = ({ id, name = 'Unnamed Vendor', contact = '', email = '' }) =
 
         const today = new Date();
         const formattedDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
-        // Build email body including only selected RFP fields.
-        const selectedKeysRaw = localStorage.getItem('rfp_selected_keys'); // expected JSON array or comma-separated string
+        const selectedKeysRaw = localStorage.getItem('rfp_selected_keys'); 
         let selectedDetails = '';
 
         if (rfpRaw) {
