@@ -1,6 +1,8 @@
 
 import React, { useState } from "react";
 import styles from "./Navbar.module.css";
+import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -24,9 +26,24 @@ const Navbar = () => {
             </button>
             <ul className={`${styles.navList} ${menuOpen ? styles.open : ""}`}>
                 <li>
-                    <a href="/addVendor" className={styles.navItem} aria-label="addVendor">
+                    <Link
+                        to="/"
+                        className={styles.navItem}
+                        aria-label="homepage"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        Home
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/addVendor"
+                        className={styles.navItem}
+                        aria-label="addVendor"
+                        onClick={() => setMenuOpen(false)}
+                    >
                         Add Vendor
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </nav>

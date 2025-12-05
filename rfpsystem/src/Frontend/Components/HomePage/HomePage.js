@@ -9,7 +9,10 @@ const HomePage = () => {
         products: [{
             name: "",
             quantity: 0,
-        }]
+            specifications: ""
+        }],
+        deliveryTimeline: Date.now(),
+        budget: 0
     });
 
     return (
@@ -82,6 +85,19 @@ const HomePage = () => {
                                         });
                                     }}
                                 />
+                                <input
+                                    type="text"
+                                    placeholder="Specifications"
+                                    value={product.specifications}
+                                    onChange={(e) =>
+                                        setRequest((prev) => {
+                                            const products = prev.products.map((p, i) =>
+                                                i === idx ? { ...p, specifications: e.target.value } : p
+                                            );
+                                            return { ...prev, products };
+                                        })
+                                    }
+                                />
                                 <button
                                     type="button"
                                     className={styles.removeButton}
@@ -107,8 +123,35 @@ const HomePage = () => {
                                 }))
                             }
                         >
-                            + Add Product
+                            Add Product
                         </button>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>Expected Delivery</label>
+                            <input
+                                className={styles.input}
+                                type="date"
+                                value={request.deliveryTimeline ? new Date(request.deliveryTimeline).toISOString().split('T')[0] : ""}
+                                onChange={(e) =>
+                                    setRequest((prev) => ({ ...prev, deliveryTimeline: new Date(e.target.value).getTime() }))
+                                }
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label className={styles.label}>Budget</label>
+                            <input
+                                className={styles.input}
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="Budget amount"
+                                value={request.budget}
+                                onChange={(e) =>
+                                    setRequest((prev) => ({ ...prev, budget: parseFloat(e.target.value || "0") }))
+                                }
+                            />
+                        </div>
                     </div>
                 </div>
 
