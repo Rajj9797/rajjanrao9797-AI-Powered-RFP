@@ -6,12 +6,20 @@ const bodyParser = require('body-parser');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = parseInt(process.env.PORT, 10) || 5000;
 const DATA_FILE = process.env.VENDORS_FILE
   ? path.resolve(__dirname, process.env.VENDORS_FILE)
   : path.join(__dirname, 'vendors.json');
 
 app.use(bodyParser.json());
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err && err.stack ? err.stack : err);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
+});
 
 async function readVendors() {
   try {
@@ -64,6 +72,13 @@ app.post('/api/vendors', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Vendor API server listening on http://localhost:${PORT}`);
+});
+
+server.on('error', (err) => {
+  console.error('Server error on listen:', err && err.stack ? err.stack : err);
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use.`);
+  }
 });

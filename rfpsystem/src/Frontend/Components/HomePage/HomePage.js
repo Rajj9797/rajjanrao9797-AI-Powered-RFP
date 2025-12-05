@@ -1,19 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./HomePage.module.css";
+import VendorList from "../VendorList/VendorList";
 
 const HomePage = () => {
 
-    const [request, setRequest] = useState({
-        title: "",
-        description: "",
-        products: [{
-            name: "",
-            quantity: 0,
-            specifications: ""
-        }],
-        deliveryTimeline: Date.now(),
-        budget: 0
+    const [isRequestSaved, setIsRequestSaved] = useState(false);
+
+    const [request, setRequest] = useState(() => {
+        const saved = localStorage.getItem("rfp_request");
+        return saved ? JSON.parse(saved) : {
+            title: "",
+            description: "",
+            products: [{
+                name: "",
+                quantity: 0,
+                specifications: ""
+            }],
+            deliveryTimeline: Date.now(),
+            budget: 0
+        };
     });
+
+    
+    const saveRequest = () => {
+        localStorage.setItem("rfp_request", JSON.stringify(request));
+        setIsRequestSaved(true);
+    };
+
+
+
+    const res = localStorage.getItem("rfp_request");
+
+    let data = null;
+    if (res) {
+        try {
+            const parsed = JSON.parse(res);
+            data = {
+                title: parsed.title ?? "",
+                description: parsed.description ?? "",
+                products: Array.isArray(parsed.products)
+                    ? parsed.products.map((p) => ({
+                          name: p?.name ?? "",
+                          quantity: Number.isFinite(p?.quantity) ? p.quantity : Number(p?.quantity) || 0,
+                          specifications: p?.specifications ?? "",
+                      }))
+                    : [],
+                deliveryDate: parsed.deliveryTimeline ? new Date(parsed.deliveryTimeline).toISOString().split("T")[0] : null,
+                deliveryTimestamp: parsed.deliveryTimeline ? Number(parsed.deliveryTimeline) : null,
+                budget: parsed.budget != null ? Number(parsed.budget) : 0,
+                budgetFormatted: `$${(Number(parsed.budget) || 0).toFixed(2)}`,
+                raw: parsed,
+            };
+        } catch (err) {
+            console.error("Failed to parse rfp_request from localStorage:", err);
+            data = null;
+        }
+    }
+    
+
+    console.log("RFP Request data:", data);
 
     return (
         <div className={styles.container}>
@@ -155,8 +200,10 @@ const HomePage = () => {
                     </div>
                 </div>
 
-                <button type="submit" className={styles.submitButton}>Send Request</button>
+                <button type="button" className={styles.submitButton} onClick={saveRequest}>Select vendor</button>
             </form>
+
+            {isRequestSaved && <VendorList requestData={data} />}
 
         </div>
     );
