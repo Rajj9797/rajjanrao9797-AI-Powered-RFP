@@ -2,23 +2,9 @@ import React from "react";
 import styles from "./VendorCard.module.css";
 
 const VendorCard = ({ id, name = 'Unnamed Vendor', contact = '', email = '' }) => {
-    const handleSendRequest = () => {
-        const subject = encodeURIComponent('Request for Proposal');
-        const rfpRaw = localStorage.getItem('rfp_request');
-        let rfpDetails = '';
-        if (rfpRaw) {
-            try {
-                const rfpObj = JSON.parse(rfpRaw);
-                for (const [k, v] of Object.entries(rfpObj)) {
-                    rfpDetails += `${k}: ${typeof v === 'object' ? JSON.stringify(v) : v}\n`;
-                }
-            } catch (e) {
-                rfpDetails = rfpRaw;
-            }
-        } else {
-            rfpDetails = 'No RFP details found in localStorage.';
-        }
 
+    const handleSendRequest = async () => {
+        const rfpRaw = localStorage.getItem('rfp_request');
         const today = new Date();
         const formattedDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
         const selectedKeysRaw = localStorage.getItem('rfp_selected_keys'); 
@@ -39,12 +25,10 @@ const VendorCard = ({ id, name = 'Unnamed Vendor', contact = '', email = '' }) =
             }
 
             if (selectedKeys.length === 0) {
-                // no selection provided — include all fields
                 for (const [k, v] of Object.entries(rfpObj)) {
                 selectedDetails += `${k}: ${typeof v === 'object' ? JSON.stringify(v) : v}\n`;
                 }
             } else {
-                // include only selected keys, if present
                 for (const key of selectedKeys) {
                 if (Object.prototype.hasOwnProperty.call(rfpObj, key)) {
                     const v = rfpObj[key];
@@ -59,12 +43,28 @@ const VendorCard = ({ id, name = 'Unnamed Vendor', contact = '', email = '' }) =
             selectedDetails = 'No RFP details found in localStorage.';
         }
 
-        const body = encodeURIComponent(
-            `Dear ${name},\n\nI am reaching out to request a detailed proposal for your services as part of our ongoing vendor selection process.\n\nRFP Details:\n${selectedDetails}\n\nPlease provide your response and any relevant documentation at your earliest convenience.\n\nDate of Request: ${formattedDate}\n\nThank you,\n`
-        );
+        const body = `Dear ${name},\n\nI am reaching out to request a detailed proposal for your services as part of our ongoing vendor selection process.\n\nRFP Details:\n${selectedDetails}\n\nPlease provide your response and any relevant documentation at your earliest convenience.\n\nDate of Request: ${formattedDate}\n\nThank you,\n`;
 
-        const mailto = `mailto:${email || ''}?subject=${subject}&body=${body}`;
-        window.location.href = mailto;
+        try {
+            await fetch('/api/rfp-requests', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    vendorId: id,
+                    vendorName: name,
+                    vendorEmail: email,
+                    subject: 'Request for Proposal',
+                    body: body,
+                    sentDate: formattedDate,
+                    rfpDetails: selectedDetails
+                })
+            });
+            
+            const mailto = `mailto:${email || ''}?subject=${encodeURIComponent('Request for Proposal')}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailto;
+        } catch (error) {
+            console.error('Error saving RFP request:', error);
+        }
     };
 
     return (

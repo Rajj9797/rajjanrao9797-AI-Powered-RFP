@@ -32,17 +32,7 @@ const Navbar = () => {
                         aria-label="homepage"
                         onClick={() => setMenuOpen(false)}
                     >
-                        Home
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        to="/email"
-                        className={styles.navItem}
-                        aria-label="email"
-                        onClick={() => setMenuOpen(false)}
-                    >
-                        Email
+                        🏠 Home
                     </Link>
                 </li>
                 <li>
@@ -52,7 +42,37 @@ const Navbar = () => {
                         aria-label="addVendor"
                         onClick={() => setMenuOpen(false)}
                     >
-                        Add Vendor
+                        ➕ Add Vendor
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/email"
+                        className={styles.navItem}
+                        aria-label="email"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        📧 RFP Requests
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/vendor-response"
+                        className={styles.navItem}
+                        aria-label="vendor-response"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        📝 Submit Response
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        to="/compare"
+                        className={styles.navItem}
+                        aria-label="compare"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        📊 Compare Proposals
                     </Link>
                 </li>
             </ul>

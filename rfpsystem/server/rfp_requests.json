@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1765019382241,
+    "vendorId": 1764955400678,
+    "vendorName": "Raj Janrao",
+    "vendorEmail": "rajjanrao0358@gmail.com",
+    "subject": "Request for Proposal",
+    "body": "Dear Raj Janrao,\n\nI am reaching out to request a detailed proposal for your services as part of our ongoing vendor selection process.\n\nRFP Details:\ntitle: Test \ndescription: Data\nproducts: [{\"name\":\"Laptop\",\"quantity\":30,\"specifications\":\"High\"},{\"name\":\"CPU\",\"quantity\":50,\"specifications\":\"High\"}]\nbudget: 23229\n\n\nPlease provide your response and any relevant documentation at your earliest convenience.\n\nDate of Request: 06/12/2025\n\nThank you,\n",
+    "sentDate": "06/12/2025",
+    "rfpDetails": "title: Test \ndescription: Data\nproducts: [{\"name\":\"Laptop\",\"quantity\":30,\"specifications\":\"High\"},{\"name\":\"CPU\",\"quantity\":50,\"specifications\":\"High\"}]\nbudget: 23229\n",
+    "createdAt": "2025-12-06T11:09:42.241Z"
+  },
+  {
+    "id": 1765019614221,
+    "vendorId": 1764955450000,
+    "vendorName": "Kiran Bhole",
+    "vendorEmail": "kiranbhole123@gmail.com",
+    "subject": "Request for Proposal",
+    "body": "Dear Kiran Bhole,\n\nI am reaching out to request a detailed proposal for your services as part of our ongoing vendor selection process.\n\nRFP Details:\ntitle: Test \ndescription: Data\nproducts: [{\"name\":\"Laptop\",\"quantity\":30,\"specifications\":\"High\"},{\"name\":\"CPU\",\"quantity\":50,\"specifications\":\"High\"}]\nbudget: 23229\n\n\nPlease provide your response and any relevant documentation at your earliest convenience.\n\nDate of Request: 06/12/2025\n\nThank you,\n",
+    "sentDate": "06/12/2025",
+    "rfpDetails": "title: Test \ndescription: Data\nproducts: [{\"name\":\"Laptop\",\"quantity\":30,\"specifications\":\"High\"},{\"name\":\"CPU\",\"quantity\":50,\"specifications\":\"High\"}]\nbudget: 23229\n",
+    "createdAt": "2025-12-06T11:13:34.221Z"
+  },
+  {
+    "id": 1765022653844,
+    "vendorId": 1764955400678,
+    "vendorName": "Raj Janrao",
+    "vendorEmail": "rajjanrao0358@gmail.com",
+    "subject": "Request for Proposal",
+    "body": "Dear Raj Janrao,\n\nI am reaching out to request a detailed proposal for your services as part of our ongoing vendor selection process.\n\nRFP Details:\ntitle: New Procurement Request\ndescription: Needed 25 Laptops\nproducts: [{\"name\":\"HP Laptop\",\"quantity\":25,\"specifications\":\"16 GB RAM, 1TB ROM\"}]\nbudget: 2000000\n\n\nPlease provide your response and any relevant documentation at your earliest convenience.\n\nDate of Request: 06/12/2025\n\nThank you,\n",
+    "sentDate": "06/12/2025",
+    "rfpDetails": "title: New Procurement Request\ndescription: Needed 25 Laptops\nproducts: [{\"name\":\"HP Laptop\",\"quantity\":25,\"specifications\":\"16 GB RAM, 1TB ROM\"}]\nbudget: 2000000\n",
+    "createdAt": "2025-12-06T12:04:13.844Z"
+  }
+]

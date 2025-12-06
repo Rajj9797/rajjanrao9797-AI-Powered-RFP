@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./HomePage.module.css";
 import VendorList from "../VendorList/VendorList";
 
 const HomePage = () => {
-
     const [isRequestSaved, setIsRequestSaved] = useState(false);
 
     const [request, setRequest] = useState(() => {
@@ -24,6 +23,12 @@ const HomePage = () => {
     
     const saveRequest = () => {
         localStorage.setItem("rfp_request", JSON.stringify(request));
+        setIsRequestSaved(true);
+    };
+
+    const handleAIGenerated = (aiRFP) => {
+        setRequest(aiRFP);
+        localStorage.setItem("rfp_request", JSON.stringify(aiRFP));
         setIsRequestSaved(true);
     };
 
@@ -65,8 +70,13 @@ const HomePage = () => {
             
             <h1 className={styles.heading}>RFP Dashboard</h1>
 
-            <p className={styles.subtitle}>Welcome to the RFP Dashboard. Use the navigation bar to add vendors and manage your RFPs.</p>
-
+            <div className={styles.modeSelector}>
+                <button 
+                    className={styles.modeButtonActive}
+                >
+                    📝 Manual Entry
+                </button>
+            </div>
             <form
                 className={styles.form}
                 onSubmit={(e) => {

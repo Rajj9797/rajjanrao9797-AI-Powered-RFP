@@ -17,6 +17,40 @@
   color: #666;
   margin-bottom: 2rem;
   line-height: 1.6;
+  text-align: center;
+}
+
+.modeSelector {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.modeButton,
+.modeButtonActive {
+  padding: 0.875rem 2rem;
+  border: 2px solid #4299e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+  color: #4299e1;
+}
+
+.modeButtonActive {
+  background: #4299e1;
+  color: white;
+}
+
+.modeButton:hover {
+  background: #ebf8ff;
+}
+
+.chatSection {
+  margin-bottom: 2rem;
 }
 
 .form {
